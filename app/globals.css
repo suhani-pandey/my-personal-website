@@ -1,26 +1,636 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Techy Design System - Cyan/Electric Blue Theme */
+
+@theme {
+  --color-background: 220 20% 97%;
+  --color-foreground: 220 20% 10%;
+
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 220 20% 10%;
+
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 220 20% 10%;
+
+  --color-primary: 185 85% 45%;
+  --color-primary-foreground: 220 20% 98%;
+
+  --color-secondary: 220 15% 92%;
+  --color-secondary-foreground: 220 20% 15%;
+
+  --color-muted: 220 15% 92%;
+  --color-muted-foreground: 220 10% 45%;
+
+  --color-accent: 195 100% 95%;
+  --color-accent-foreground: 185 85% 35%;
+
+  --color-destructive: 0 72% 50%;
+  --color-destructive-foreground: 0 0% 100%;
+
+  --color-border: 220 15% 88%;
+  --color-input: 220 15% 88%;
+  --color-ring: 185 85% 45%;
+
+  --radius: 0.75rem;
+
+  /* Techy custom tokens */
+  --color-glow: 185 100% 60%;
+  --color-glow-secondary: 260 100% 70%;
+  --color-terminal: 150 60% 50%;
+
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-chart-1: 185 85% 50%;
+  --color-chart-2: 200 100% 55%;
+  --color-chart-3: 260 100% 65%;
+  --color-chart-4: 150 60% 50%;
+  --color-chart-5: 220 15% 50%;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --color-background: 220 25% 6%;
+  --color-foreground: 220 15% 95%;
+
+  --color-card: 220 25% 10%;
+  --color-card-foreground: 220 15% 95%;
+
+  --color-popover: 220 25% 12%;
+  --color-popover-foreground: 220 15% 95%;
+
+  --color-primary: 185 100% 55%;
+  --color-primary-foreground: 220 25% 6%;
+
+  --color-secondary: 220 20% 18%;
+  --color-secondary-foreground: 220 15% 90%;
+
+  --color-muted: 220 20% 18%;
+  --color-muted-foreground: 220 10% 60%;
+
+  --color-accent: 220 25% 15%;
+  --color-accent-foreground: 185 100% 60%;
+
+  --color-destructive: 0 72% 55%;
+  --color-destructive-foreground: 0 0% 100%;
+
+  --color-border: 220 20% 18%;
+  --color-input: 220 20% 18%;
+  --color-ring: 185 100% 55%;
+
+  --color-glow: 185 100% 65%;
+  --color-glow-secondary: 260 100% 75%;
+  --color-terminal: 150 60% 55%;
+
+  --color-chart-1: 185 100% 55%;
+  --color-chart-2: 200 100% 60%;
+  --color-chart-3: 260 100% 70%;
+  --color-chart-4: 150 60% 55%;
+  --color-chart-5: 220 15% 60%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: hsl(var(--color-border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utility Classes */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, hsl(185 85% 45%), hsl(200 100% 50%));
+}
+
+.text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, hsl(260 100% 65%), hsl(185 85% 50%));
+}
+
+.glow {
+  box-shadow: 0 0 30px hsl(185 85% 45% / 0.3);
+}
+
+.dark .glow {
+  box-shadow: 0 0 40px hsl(185 100% 55% / 0.25);
+}
+
+.glow-strong {
+  box-shadow: 0 0 50px hsl(185 85% 45% / 0.5);
+}
+
+.dark .glow-strong {
+  box-shadow: 0 0 60px hsl(185 100% 55% / 0.4);
+}
+
+.glass {
+  backdrop-filter: blur(24px);
+  background-color: hsl(var(--color-card) / 0.8);
+  border: 1px solid hsl(var(--color-border) / 0.5);
+}
+
+.glass-strong {
+  backdrop-filter: blur(40px);
+  background-color: hsl(var(--color-card) / 0.9);
+  border: 1px solid hsl(var(--color-border) / 0.3);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+* {
+  border-color: hsl(var(--color-border));
+}
+
+body {
+  background-color: hsl(var(--color-background));
+  color: hsl(var(--color-foreground));
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utility Classes */
+.text-gradient {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, hsl(185 85% 45%), hsl(200 100% 50%));
+}
+
+.text-gradient-accent {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(135deg, hsl(260 100% 65%), hsl(185 85% 50%));
+}
+
+.glow {
+  box-shadow: 0 0 30px hsl(185 85% 45% / 0.3);
+}
+
+.dark .glow {
+  box-shadow: 0 0 40px hsl(185 100% 55% / 0.25);
+}
+
+.glow-strong {
+  box-shadow: 0 0 50px hsl(185 85% 45% / 0.5);
+}
+
+.dark .glow-strong {
+  box-shadow: 0 0 60px hsl(185 100% 55% / 0.4);
+}
+
+.glass {
+  backdrop-filter: blur(24px);
+  background-color: hsl(var(--color-card) / 0.8);
+  border: 1px solid hsl(var(--color-border) / 0.5);
+}
+
+.glass-strong {
+  backdrop-filter: blur(40px);
+  background-color: hsl(var(--color-card) / 0.9);
+  border: 1px solid hsl(var(--color-border) / 0.3);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Techy Design System - Cyan/Electric Blue Theme */
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 185 85% 45%;
+    --primary-foreground: 220 20% 98%;
+
+    --secondary: 220 15% 92%;
+    --secondary-foreground: 220 20% 15%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 195 100% 95%;
+    --accent-foreground: 185 85% 35%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 185 85% 45%;
+
+    --radius: 0.75rem;
+
+    /* Techy custom tokens */
+    --glow: 185 100% 60%;
+    --glow-secondary: 260 100% 70%;
+    --terminal: 150 60% 50%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(185 85% 45%), hsl(200 100% 50%));
+    --gradient-accent: linear-gradient(135deg, hsl(260 100% 65%), hsl(185 85% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(220 20% 97%));
+
+    --shadow-glow: 0 0 30px hsl(185 85% 45% / 0.3);
+    --shadow-glow-strong: 0 0 50px hsl(185 85% 45% / 0.5);
+
+    --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 220 20% 10%;
+    --sidebar-primary: 185 85% 45%;
+    --sidebar-primary-foreground: 220 20% 98%;
+    --sidebar-accent: 195 100% 95%;
+    --sidebar-accent-foreground: 185 85% 35%;
+    --sidebar-border: 220 15% 88%;
+    --sidebar-ring: 185 85% 45%;
+
+    --chart-1: 185 85% 50%;
+    --chart-2: 200 100% 55%;
+    --chart-3: 260 100% 65%;
+    --chart-4: 150 60% 50%;
+    --chart-5: 220 15% 50%;
+  }
+
+  .dark {
+    --background: 220 25% 6%;
+    --foreground: 220 15% 95%;
+
+    --card: 220 25% 10%;
+    --card-foreground: 220 15% 95%;
+
+    --popover: 220 25% 12%;
+    --popover-foreground: 220 15% 95%;
+
+    --primary: 185 100% 55%;
+    --primary-foreground: 220 25% 6%;
+
+    --secondary: 220 20% 18%;
+    --secondary-foreground: 220 15% 90%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 220 25% 15%;
+    --accent-foreground: 185 100% 60%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 185 100% 55%;
+
+    --glow: 185 100% 65%;
+    --glow-secondary: 260 100% 75%;
+    --terminal: 150 60% 55%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(185 100% 50%), hsl(200 100% 60%));
+    --gradient-accent: linear-gradient(135deg, hsl(260 100% 70%), hsl(185 100% 55%));
+    --gradient-card: linear-gradient(145deg, hsl(220 25% 12%), hsl(220 25% 8%));
+
+    --shadow-glow: 0 0 40px hsl(185 100% 55% / 0.25);
+    --shadow-glow-strong: 0 0 60px hsl(185 100% 55% / 0.4);
+
+    --sidebar-background: 220 25% 8%;
+    --sidebar-foreground: 220 15% 95%;
+    --sidebar-primary: 185 100% 55%;
+    --sidebar-primary-foreground: 220 25% 6%;
+    --sidebar-accent: 220 25% 15%;
+    --sidebar-accent-foreground: 185 100% 60%;
+    --sidebar-border: 220 20% 18%;
+    --sidebar-ring: 185 100% 55%;
+
+    --chart-1: 185 100% 55%;
+    --chart-2: 200 100% 60%;
+    --chart-3: 260 100% 70%;
+    --chart-4: 150 60% 55%;
+    --chart-5: 220 15% 60%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .text-gradient-accent {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: var(--gradient-accent);
+  }
+
+  .glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-strong {
+    box-shadow: var(--shadow-glow-strong);
+  }
+
+  .glass {
+    backdrop-filter: blur(24px);
+    background-color: hsl(var(--card) / 0.8);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-strong {
+    backdrop-filter: blur(40px);
+    background-color: hsl(var(--card) / 0.9);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slide-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in-up {
+    animation: fade-in-up 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-left {
+    animation: slide-in-left 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.5s ease-out forwards;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
 }
