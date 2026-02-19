@@ -20,7 +20,7 @@ const BG    = "#F8F8F6";
 const BORDER= "#E8E8E8";
 
 /* ─── DATA ─── */
-const NAV_LINKS = ["About", "Skills", "Projects", "Journey", "Contact"];
+const NAV_LINKS = ["About", "Skills", "Journey", "Projects", "Contact"];
 
 const techStack = [
   { icon: Terminal, name: "Languages",     items: ["Python", "C#", "TypeScript", "JavaScript"] },
@@ -96,7 +96,7 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 24);
-      const sections = ["about","skills","projects","journey","contact"];
+      const sections = ["about","skills","journey","projects","contact"];
       const sp = window.scrollY + 140;
       for (const s of sections) {
         const el = document.getElementById(s);
