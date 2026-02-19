@@ -222,6 +222,8 @@ function Navbar() {
 
 /* ─── HERO BLOB — image clipped INSIDE the blob via SVG clipPath ─── */
 function HeroBlobWithImage() {
+  const [showAltImage, setShowAltImage] = useState(false);
+  
   // The blob path used for BOTH the fill and the clipPath mask
   const blobA = "M280,25 Q340,-5 420,35 Q485,68 495,145 Q510,225 485,295 Q470,350 410,395 Q340,450 250,458 Q165,465 100,415 Q40,370 25,295 Q8,210 45,135 Q80,65 155,38 Q215,15 280,25Z";
   const blobB = "M265,18 Q330,-8 410,28 Q478,60 492,138 Q505,218 478,290 Q465,348 402,390 Q335,445 245,455 Q160,462 95,408 Q35,362 22,288 Q5,205 48,130 Q85,60 160,35 Q220,12 265,18Z";
@@ -280,13 +282,24 @@ function HeroBlobWithImage() {
       />
 
       {/* ── IMAGE clipped to the exact blob shape ── */}
-      <image
-        href="/suhani-char.png"
-        x="0" y="0" width="520" height="520"
-        preserveAspectRatio="xMidYMid slice"
-        clipPath="url(#blobClip)"
-        style={{ filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.18))" }}
-      />
+      <motion.g
+        animate={{ 
+          scale: showAltImage ? [1, 0.85, 1] : [1, 0.85, 1],
+          rotateY: showAltImage ? [0, 180, 360] : [0, -180, -360],
+          opacity: [1, 0.7, 1]
+        }}
+        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        style={{ transformOrigin: "center", cursor: "pointer" }}
+        onClick={() => setShowAltImage(!showAltImage)}
+      >
+        <image
+          href={showAltImage ? "/profile.jpg" : "/suhani-char.png"}
+          x="0" y="0" width="520" height="520"
+          preserveAspectRatio="xMidYMid slice"
+          clipPath="url(#blobClip)"
+          style={{ filter: "drop-shadow(0 12px 32px rgba(0,0,0,0.18))" }}
+        />
+      </motion.g>
 
       {/* Sparkle accent dots around the blob */}
       {[
