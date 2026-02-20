@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "./query-provider";
+import { ThemeProvider } from "next-themes";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-sans",
@@ -30,15 +31,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} antialiased`} style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
-        <QueryProvider>
-          <TooltipProvider>
-            {children}
-            <Toaster />
-            <Sonner />
-          </TooltipProvider>
-        </QueryProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+          <QueryProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+              <Sonner />
+            </TooltipProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
