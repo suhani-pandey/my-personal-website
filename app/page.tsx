@@ -5,8 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import {
   ExternalLink, Terminal, Layers, Database, Cpu,
   MapPin, Calendar, Brain, Lightbulb, Heart, BookOpen,
-  Menu, X, ArrowRight, Sparkles, Send, Music, Tv,
+  Menu, X, ArrowRight, Sparkles, Send, Music, Tv, Mail, Linkedin, Github,
 } from "lucide-react";
+import { ChatWidget } from "@/components/ChatWidget";
 
 /* ─── TOKENS ─── */
 const Y     = "#F5C518";
@@ -1187,161 +1188,198 @@ export default function Portfolio() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 48 }}
+              style={{ fontSize: 16, color: "rgba(255,255,255,0.55)", lineHeight: 1.7, marginBottom: 64 }}
             >
-              Have a project in mind? Want to collaborate? Just drop me a message!
+              Choose your preferred way to reach out – I'm always excited to connect!
             </motion.p>
           </motion.div>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            style={{
-              background: "rgba(255,255,255,0.03)",
-              backdropFilter: "blur(20px)",
-              border: "1px solid rgba(255,255,255,0.1)",
-              borderRadius: 24,
-              padding: 40,
-              boxShadow: "0 20px 60px rgba(0,0,0,0.3)",
-            }}
-          >
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              const formData = new FormData(e.currentTarget);
-              const name = formData.get('name');
-              const message = formData.get('message');
-              window.location.href = `mailto:Iamsuhani5@gmail.com?subject=Message from ${name}&body=${message}`;
-            }}>
-              <div style={{ marginBottom: 24 }}>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.7)", marginBottom: 10, letterSpacing: "0.05em" }}>
-                  Your Name
-                </label>
-                <motion.input
-                  whileFocus={{ scale: 1.01, borderColor: Y }}
-                  type="text"
-                  name="name"
-                  required
-                  placeholder="John Doe"
-                  style={{
-                    width: "100%",
-                    padding: "14px 20px",
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: WHITE,
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1.5px solid rgba(255,255,255,0.15)",
-                    borderRadius: 12,
-                    outline: "none",
-                    transition: "all 0.3s ease",
-                  }}
-                />
-              </div>
-
-              <div style={{ marginBottom: 32 }}>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 700, color: "rgba(255,255,255,0.7)", marginBottom: 10, letterSpacing: "0.05em" }}>
-                  Your Message
-                </label>
-                <motion.textarea
-                  whileFocus={{ scale: 1.01, borderColor: Y }}
-                  name="message"
-                  required
-                  placeholder="Tell me about your project or just say hi..."
-                  rows={5}
-                  style={{
-                    width: "100%",
-                    padding: "14px 20px",
-                    fontSize: 15,
-                    fontWeight: 500,
-                    color: WHITE,
-                    background: "rgba(255,255,255,0.05)",
-                    border: "1.5px solid rgba(255,255,255,0.15)",
-                    borderRadius: 12,
-                    outline: "none",
-                    transition: "all 0.3s ease",
-                    resize: "vertical",
-                    fontFamily: "Plus Jakarta Sans, sans-serif",
-                  }}
-                />
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.03, y: -2 }}
-                whileTap={{ scale: 0.97 }}
+          {/* Contact Options */}
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, maxWidth: 900, margin: "0 auto" }}>
+            
+            {/* Email Card */}
+            <motion.a
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=iamsuhani5@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(20px)",
+                border: "1.5px solid rgba(255,255,255,0.15)",
+                borderRadius: 20,
+                padding: 32,
+                textDecoration: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 16,
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <motion.div
                 style={{
-                  width: "100%",
-                  padding: "16px 32px",
-                  background: Y,
-                  color: DARK,
-                  border: "none",
-                  borderRadius: 12,
-                  fontSize: 16,
-                  fontWeight: 800,
-                  cursor: "pointer",
+                  width: 70,
+                  height: 70,
+                  borderRadius: "50%",
+                  background: `linear-gradient(135deg, ${Y} 0%, ${YD} 100%)`,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  gap: 10,
-                  boxShadow: `0 8px 32px rgba(245,197,24,0.35)`,
-                  transition: "all 0.3s ease",
+                  boxShadow: `0 8px 24px rgba(245,197,24,0.3)`,
                 }}
               >
-                <Send size={18} />
-                Send Message
-              </motion.button>
-            </form>
+                <Mail size={32} color={DARK} />
+              </motion.div>
+              <div style={{ textAlign: "center" }}>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: WHITE, marginBottom: 8 }}>Email Me</h3>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", marginBottom: 8 }}>Send me a message directly</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: Y }}>iamsuhani5@gmail.com</p>
+              </div>
+              <div style={{
+                position: "absolute",
+                top: -100,
+                right: -100,
+                width: 200,
+                height: 200,
+                background: `radial-gradient(circle, ${Y}15 0%, transparent 70%)`,
+                pointerEvents: "none"
+              }} />
+            </motion.a>
 
-            {/* Alternative contact methods */}
-            <div style={{ marginTop: 32, paddingTop: 32, borderTop: "1px solid rgba(255,255,255,0.1)", display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-              <motion.a
-                href="mailto:Iamsuhani5@gmail.com"
-                whileHover={{ scale: 1.05, y: -2 }}
+            {/* LinkedIn Card */}
+            <motion.a
+              href="https://www.linkedin.com/in/suhani-pandey-724275231/"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(20px)",
+                border: "1.5px solid rgba(255,255,255,0.15)",
+                borderRadius: 20,
+                padding: 32,
+                textDecoration: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 16,
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <motion.div
                 style={{
-                  display: "inline-flex",
+                  width: 70,
+                  height: 70,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #0077B5 0%, #005582 100%)",
+                  display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  padding: "10px 20px",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: "rgba(255,255,255,0.7)",
-                  textDecoration: "none",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  borderRadius: 10,
-                  transition: "all 0.3s ease",
+                  justifyContent: "center",
+                  boxShadow: "0 8px 24px rgba(0,119,181,0.3)",
                 }}
               >
-                <Send size={14} />
-                Email
-              </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/in/suhani-pandey-724275231/"
-                target="_blank"
-                rel="noreferrer"
-                whileHover={{ scale: 1.05, y: -2 }}
+                <Linkedin size={32} color={WHITE} />
+              </motion.div>
+              <div style={{ textAlign: "center" }}>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: WHITE, marginBottom: 8 }}>LinkedIn</h3>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", marginBottom: 8 }}>Connect professionally</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#0077B5" }}>@suhani-pandey</p>
+              </div>
+              <div style={{
+                position: "absolute",
+                top: -100,
+                right: -100,
+                width: 200,
+                height: 200,
+                background: "radial-gradient(circle, rgba(0,119,181,0.15) 0%, transparent 70%)",
+                pointerEvents: "none"
+              }} />
+            </motion.a>
+
+            {/* GitHub Card */}
+            <motion.a
+              href="https://github.com/suhani-pandey"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                backdropFilter: "blur(20px)",
+                border: "1.5px solid rgba(255,255,255,0.15)",
+                borderRadius: 20,
+                padding: 32,
+                textDecoration: "none",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 16,
+                cursor: "pointer",
+                transition: "all 0.3s ease",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+                position: "relative",
+                overflow: "hidden",
+              }}
+            >
+              <motion.div
                 style={{
-                  display: "inline-flex",
+                  width: 70,
+                  height: 70,
+                  borderRadius: "50%",
+                  background: "linear-gradient(135deg, #6e5494 0%, #4a3768 100%)",
+                  display: "flex",
                   alignItems: "center",
-                  gap: 8,
-                  padding: "10px 20px",
-                  fontSize: 14,
-                  fontWeight: 600,
-                  color: "rgba(255,255,255,0.7)",
-                  textDecoration: "none",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  borderRadius: 10,
-                  transition: "all 0.3s ease",
+                  justifyContent: "center",
+                  boxShadow: "0 8px 24px rgba(110,84,148,0.3)",
                 }}
               >
-                <ExternalLink size={14} />
-                LinkedIn
-              </motion.a>
-            </div>
-          </motion.div>
+                <Github size={32} color={WHITE} />
+              </motion.div>
+              <div style={{ textAlign: "center" }}>
+                <h3 style={{ fontSize: 20, fontWeight: 800, color: WHITE, marginBottom: 8 }}>GitHub</h3>
+                <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)", marginBottom: 8 }}>Check out my code</p>
+                <p style={{ fontSize: 13, fontWeight: 600, color: "#6e5494" }}>@suhani-pandey</p>
+              </div>
+              <div style={{
+                position: "absolute",
+                top: -100,
+                right: -100,
+                width: 200,
+                height: 200,
+                background: "radial-gradient(circle, rgba(110,84,148,0.15) 0%, transparent 70%)",
+                pointerEvents: "none"
+              }} />
+            </motion.a>
+
+          </div>
         </div>
       </section>
+
+      {/* Chat Widget */}
+      <ChatWidget />
     </>
   );
 }
