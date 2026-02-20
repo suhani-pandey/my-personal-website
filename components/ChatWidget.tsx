@@ -21,7 +21,7 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
-      text: "Hi! I'm Suhani's AI assistant. Ask me anything about her experience, projects, or skills! 👋",
+      text: "Hi! I'm Suhani's AI assistant. Ask me anything about her. I can give exact response like Suhani since I am trained by her👋",
       sender: "bot",
       timestamp: new Date(),
     },
