@@ -10,9 +10,19 @@ export function GlobalStyles({ colors }: { colors: ReturnType<typeof useColors> 
     <style>{`
       @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Dancing+Script:wght@700&display=swap');
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
+      html { 
+        scroll-behavior: smooth; 
+        scroll-snap-type: y mandatory;
+        overflow-y: scroll;
+      }
       body { font-family: 'Plus Jakarta Sans', sans-serif !important; background: ${BG}; color: ${TEXT}; -webkit-font-smoothing: antialiased; }
       .name-font { font-family: 'Dancing Script', cursive; }
+      
+      .snap-section {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        min-height: 100vh;
+      }
 
       .tl-wrapper { position: relative; max-width: 860px; margin: 0 auto; }
       .tl-line { position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, ${BORDER} 10%, ${BORDER} 90%, transparent); transform: translateX(-50%); }

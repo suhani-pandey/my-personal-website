@@ -30,13 +30,27 @@ export default function Portfolio() {
       <GlobalStyles colors={colors} />
       <CursorGlow />
       <Navbar />
-      <HeroSection heroRef={heroRef} heroY={heroY} heroO={heroO} colors={colors} />
-      <AboutSection />
-      <SkillsSection />
-      <JourneySection />
-      <ProjectsSection />
-      <BeyondTheCodeSection />
-      <ContactSection />
+      <div className="snap-section">
+        <HeroSection heroRef={heroRef} heroY={heroY} heroO={heroO} colors={colors} />
+      </div>
+      <div className="snap-section">
+        <AboutSection />
+      </div>
+      <div className="snap-section">
+        <SkillsSection />
+      </div>
+      <div className="snap-section">
+        <JourneySection />
+      </div>
+      <div className="snap-section">
+        <ProjectsSection />
+      </div>
+      <div className="snap-section">
+        <BeyondTheCodeSection />
+      </div>
+      <div className="snap-section">
+        <ContactSection />
+      </div>
       <ChatWidget />
       <ThemeToggle />
     </>
